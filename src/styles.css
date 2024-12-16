@@ -219,7 +219,7 @@ button.new-project {
 button.new-task {
     background-color: var(--blue-color);
     border: none;
-    border-radius: 25px;
+    border-radius: 5px;
     color: #fff;
     padding: 10px 18px;
     cursor: pointer;
@@ -230,23 +230,99 @@ button.new-task {
     grid-area: main-content;
     padding: calc(var(--section-padding) * 2) var(--section-padding);
 
-    display: grid;
+    /* display: grid;
     grid-template-columns: 2.5fr 1fr;
-    gap: var(--main-content-gap);
+    gap: var(--main-content-gap); */
+    height: 1000px;
 }
 
-.cards-container {
+/* .cards-container {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: var(--main-content-gap);
 
-}
+} */
 
-.cards-container h2 {
+/* .cards-container h2 {
     grid-column: 1 / -1;
-}
+} */
 
-.card {
+/* .card {
     border-left: 8px solid orange;
     padding: var(--section-padding) 1.2rem;
+} */
+
+/* todo styles */
+.todo-container {
+    margin: var(--section-padding) 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #fff6f6;
+    width: 65%;
+    padding: 1rem;
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+}
+
+.todo-completed,
+.todo-failed {
+    background-color: rgb(0, 252, 155);
+    color: white;
+}
+
+.todo-failed {
+    background-color: lightcoral;
+}
+
+.todo-container p {
+    color: rgb(151, 151, 151);
+}
+
+.todo-container .due-date-container {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+}
+
+.todo-container .due-date-container svg {
+    width: 25px;
+    height: 25px;
+    fill: currentColor;
+}
+
+.todo-container .priority-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.todo-container .priority-container h4 {
+    padding: 3px 8px;
+    border-radius: 4px;
+    background-color: green;
+    color: white;
+
+}
+
+.todo-container .priority-container h4.medium {
+    background-color: gray;
+}
+
+.todo-container .priority-container h4.low {
+    background-color: orangered;
+}
+
+.todo-container .todo-buttons {
+    display: flex;
+    gap: 1rem;
+}
+
+.todo-container .todo-buttons button {
+    cursor: pointer;
+}
+
+h2 {
+    margin-bottom: 30px;
 }
