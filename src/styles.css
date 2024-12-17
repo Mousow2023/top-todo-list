@@ -110,7 +110,6 @@ nav .nav-list {
 nav .nav-list li {
     display: flex;
     gap: 1rem;
-    cursor: pointer;
 }
 
 nav .nav-list h4 {
@@ -144,6 +143,7 @@ button.new-project {
     align-self: center;
     font-size: inherit;
     font-size: 2.5rem;
+    padding: 10px;
     /* Inherits font size from the container */
 }
 
@@ -267,7 +267,7 @@ button.new-task {
 
 .todo-completed,
 .todo-failed {
-    background-color: rgb(0, 252, 155);
+    background-color: #7aeb94;
     color: white;
 }
 
@@ -321,6 +321,59 @@ button.new-task {
 
 .todo-container .todo-buttons button {
     cursor: pointer;
+}
+
+/* modal styles */
+.dialog {
+    padding: 1rem;
+    border: none;
+    border-radius: 7px;
+
+    /* center it in the middle */
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.dialog form label {
+    margin-bottom: .5rem;
+    display: block;
+}
+
+.dialog input {
+    width: 100%;
+    margin-bottom: 1rem;
+    font: inherit;
+    padding: 4px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    transition: all .3s ease;
+}
+
+dialog input:focus {
+    border-color: #007bff;
+    background-color: #eaf4ff;
+    outline: none;
+}
+
+.dialog button {
+    border: none;
+    padding: 8px;
+    border-radius: 3px;
+    color: #fff;
+    cursor: pointer;
+    background-color: var(--blue-color);
+}
+
+dialog .cancel-button {
+    float: right;
+    background-color: #FF4D4D;
+}
+
+
+.dialog::backdrop {
+    background-color: rgba(0, 0, 0, 0.45);
 }
 
 h2 {
