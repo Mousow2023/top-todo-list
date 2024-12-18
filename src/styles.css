@@ -229,28 +229,8 @@ button.new-task {
 .main-content {
     grid-area: main-content;
     padding: calc(var(--section-padding) * 2) var(--section-padding);
-
-    /* display: grid;
-    grid-template-columns: 2.5fr 1fr;
-    gap: var(--main-content-gap); */
     height: 1000px;
 }
-
-/* .cards-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: var(--main-content-gap);
-
-} */
-
-/* .cards-container h2 {
-    grid-column: 1 / -1;
-} */
-
-/* .card {
-    border-left: 8px solid orange;
-    padding: var(--section-padding) 1.2rem;
-} */
 
 /* todo styles */
 .todo-container {
@@ -324,7 +304,8 @@ button.new-task {
 }
 
 /* modal styles */
-.dialog {
+.modal {
+    width: 45ch;
     padding: 1rem;
     border: none;
     border-radius: 7px;
@@ -334,14 +315,23 @@ button.new-task {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+
 }
 
-.dialog form label {
+.modal h3 {
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.modal form label {
     margin-bottom: .5rem;
     display: block;
 }
 
-.dialog input {
+.modal form input,
+.modal form select,
+.modal form textarea {
+    margin-bottom: 1rem;
     width: 100%;
     margin-bottom: 1rem;
     font: inherit;
@@ -351,13 +341,15 @@ button.new-task {
     transition: all .3s ease;
 }
 
-dialog input:focus {
+.modal form input:focus,
+.modal form select:focus,
+.modal form textarea:focus {
     border-color: #007bff;
     background-color: #eaf4ff;
     outline: none;
 }
 
-.dialog button {
+.modal button {
     border: none;
     padding: 8px;
     border-radius: 3px;
@@ -366,13 +358,17 @@ dialog input:focus {
     background-color: var(--blue-color);
 }
 
-dialog .cancel-button {
+.modal form button {
     float: right;
+}
+
+.modal .cancel {
+    float: left;
     background-color: #FF4D4D;
 }
 
 
-.dialog::backdrop {
+.modal::backdrop {
     background-color: rgba(0, 0, 0, 0.45);
 }
 

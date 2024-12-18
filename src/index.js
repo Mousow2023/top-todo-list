@@ -81,14 +81,28 @@ const todo = new Todo(...testValues);
 
 // console.log(createTodo());
 
-const dialog = document.querySelector(".dialog");
+// The new project dialog
+const projectDialog = document.querySelector(".new-project-dialog");
 const showDialogButton = document.querySelector(".new-project");
 const closeDialogButton = document.querySelector(".cancel-button");
 
 showDialogButton.addEventListener("click", () => {
-    dialog.showModal();
+    projectDialog.showModal();
 });
 
 closeDialogButton.addEventListener("click", () => {
-    dialog.close();
+    projectDialog.close();
+});
+
+// The new todo dialog
+const newTodoButton = document.querySelector(".new-task");
+const todoDialog = document.querySelector(".new-todo-dialog");
+const closeTodoDialog = document.querySelector(".close-todo-dialog");
+
+newTodoButton.addEventListener("click", () => {
+    todoDialog.showModal();
+})
+
+closeTodoDialog.addEventListener("click", () => {
+    todoDialog.close();
 })

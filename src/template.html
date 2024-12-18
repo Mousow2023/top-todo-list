@@ -56,14 +56,43 @@
                 <button class="all">All</button>
             </div>
             <button class="new-task">New Task</button>
-            <dialog class="dialog">
+            <!-- New project dialog -->
+            <dialog class="dialog new-project-dialog modal">
                 <form action="" method="dialog">
                     <label for="project-name">Project Name:</label>
                     <input type="text" form="project-name" placeholder="e.g: Education">
                     <button>Submit</button>
                 </form>
-                <br>
-                <button class="cancel-button">Cancel</button>
+                <button class="cancel-button cancel">Cancel</button>
+            </dialog>
+            <!-- New todo dialog -->
+            <dialog class="new-todo-dialog modal">
+                <h3>ADD TODO</h3>
+                <form action="" method="dialog">
+                    <div class="form-group">
+                        <label for="name">Name:</label>
+                        <input type="text" id="name" placeholder="e.g: Train">
+                    </div>
+                    <div class="form-group">
+                        <label for="priority">Priority:</label>
+                        <select name="priority" id="priority">
+                            <option disabled>Select Priority</option>
+                            <option>High</option>
+                            <option>Medium</option>
+                            <option>Low</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="due-date">Due Date:</label>
+                        <input type="date" name="due-date" id="due-date" due-date">
+                    </div>
+                    <div class="form-group">
+                        <label for="description">Description:</label>
+                        <textarea name="description" id="description"></textarea>
+                    </div>
+                    <button class="submit-todo">Save</button>
+                </form>
+                <button class="close-todo-dialog cancel">Cancel</button>
             </dialog>
         </header>
 
