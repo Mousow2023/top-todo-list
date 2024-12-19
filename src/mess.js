@@ -4,8 +4,7 @@ class Project {
     }
 }
 
-
-export const projects = getProjects()
+export const projects = JSON.parse(localStorage.getItem("projects")) || new Project("Main");
 
 export function displayProjectDialog() {
     // The new project dialog
@@ -27,8 +26,6 @@ export function handleProjectCreation(formSelector, dialogSelector) {
     const dialog = document.querySelector(dialogSelector)
 
     form.addEventListener("submit", (event) => {
-        localStorage.removeItem('projects');
-
         event.preventDefault();
 
         const input = form.querySelector(".project-name");
@@ -39,35 +36,22 @@ export function handleProjectCreation(formSelector, dialogSelector) {
 
             dialog.close();
 
-            // Create the project if it does not exist already
-            for (let i = 0; i < projects.length; i++) {
-                const element = projects[i];
-                if (element.name == projectName) {
-                    return alert("Project already exist");
-                }
-            }
-
+            // Create the project
             const project = new Project(projectName);
             // Add the project to the list of projects
             projects.push(project);
             // Update local storage
-            localStorage.setItem("projects", JSON.stringify(projects));
+            saveToStorage(projects);
 
-            console.log(getProjects())
-
-            return;
+            return projects;
         }
     });
 }
 
-function getProjects() {
-    return JSON.parse(localStorage.getItem("projects")) || [new Project("Main")];
-}
-
 // Save projects to localStorage
-// function saveToStorage(listOfprojects) {
-//     return ;
-// }
+function saveToStorage(listOfprojects) {
+    return localStorage.setItem("projects", JSON.stringify(listOfprojects));
+}
 
 // Iterate over save project and append them to the container
 // export function renderProjects(container, projects) {
@@ -86,3 +70,11 @@ function getProjects() {
 
 //     return container;
 // }
+
+
+// from index.js
+console.log(handleProjectCreation(".project-form", ".new-project-dialog"));
+
+// Get the container of the projects
+// const projectsContainer = document.querySelector(".nav-list");
+// projectsContainer.innerHTML = renderProjects(container, projects);
