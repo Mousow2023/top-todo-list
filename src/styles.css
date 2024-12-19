@@ -304,7 +304,7 @@ button.new-task {
 }
 
 /* modal styles */
-.modal {
+dialog {
     width: 45ch;
     padding: 1rem;
     border: none;
@@ -315,22 +315,22 @@ button.new-task {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-
+    transition: all .15s ease-in;
 }
 
-.modal h3 {
+dialog h3 {
     text-align: center;
     margin-bottom: 1rem;
 }
 
-.modal form label {
+dialog form label {
     margin-bottom: .5rem;
     display: block;
 }
 
-.modal form input,
-.modal form select,
-.modal form textarea {
+dialog form input,
+dialog form select,
+dialog form textarea {
     margin-bottom: 1rem;
     width: 100%;
     margin-bottom: 1rem;
@@ -341,15 +341,15 @@ button.new-task {
     transition: all .3s ease;
 }
 
-.modal form input:focus,
-.modal form select:focus,
-.modal form textarea:focus {
+dialog form input:focus,
+dialog form select:focus,
+dialog form textarea:focus {
     border-color: #007bff;
     background-color: #eaf4ff;
     outline: none;
 }
 
-.modal button {
+dialog button {
     border: none;
     padding: 8px;
     border-radius: 3px;
@@ -358,18 +358,18 @@ button.new-task {
     background-color: var(--blue-color);
 }
 
-.modal form button {
+dialog form button {
     float: right;
 }
 
-.modal .cancel {
+dialog .cancel {
     float: left;
     background-color: #FF4D4D;
 }
 
 
-.modal::backdrop {
-    background-color: rgba(0, 0, 0, 0.45);
+dialog::backdrop {
+    background-color: rgba(0, 0, 0, 0.50);
 }
 
 h2 {

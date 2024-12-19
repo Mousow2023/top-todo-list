@@ -1,3 +1,4 @@
+import { displayProjectDialog, handleProjectCreation } from "./projects.js";
 import "./styles.css";
 import "./reset.css";
 
@@ -82,17 +83,9 @@ const todo = new Todo(...testValues);
 // console.log(createTodo());
 
 // The new project dialog
-const projectDialog = document.querySelector(".new-project-dialog");
-const showDialogButton = document.querySelector(".new-project");
-const closeDialogButton = document.querySelector(".cancel-button");
+displayProjectDialog();
 
-showDialogButton.addEventListener("click", () => {
-    projectDialog.showModal();
-});
-
-closeDialogButton.addEventListener("click", () => {
-    projectDialog.close();
-});
+handleProjectCreation(".project-form", ".new-project-dialog");
 
 // The new todo dialog
 const newTodoButton = document.querySelector(".new-task");
