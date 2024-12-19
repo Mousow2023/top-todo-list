@@ -85,9 +85,7 @@ const todo = new Todo(...testValues);
 // The new project dialog
 displayProjectDialog();
 
-handleProjectCreation(".project-form", ".new-project-dialog")
-
-localStorage.clear();
+handleProjectCreation(".project-form", ".new-project-dialog");
 
 // The new todo dialog
 const newTodoButton = document.querySelector(".new-task");
