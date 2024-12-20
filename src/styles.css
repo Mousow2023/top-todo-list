@@ -1,6 +1,6 @@
 :root {
     --section-padding: 1.5rem;
-    --sidebar-section-gap: 2.5rem;
+    --sidebar-section-gap: 1rem;
     --main-color: #e5e7eb;
     --blue-color: #007bff;
     --main-content-gap: 1.5rem;
@@ -98,7 +98,7 @@ aside.sidebar {
 nav {
     display: flex;
     flex-direction: column;
-    gap: var(--sidebar-section-gap);
+    gap: .8rem;
 }
 
 nav .nav-list {
@@ -135,20 +135,33 @@ nav .nav-list li svg {
 }
 
 button.new-project {
-    border: none;
+    width: 35px;
+    height: 35px;
+    border: 2px solid white;
+    border-radius: 100%;
     background-color: transparent;
     color: white;
     cursor: pointer;
     display: flex;
-    align-self: center;
-    font-size: inherit;
+    align-items: center;
+    justify-content: center;
     font-size: 2.5rem;
-    padding: 10px;
-    /* Inherits font size from the container */
 }
 
 .sub-project {
     margin-left: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.sub-project div {
+    display: flex;
+    gap: 1.3rem;
+}
+
+.sub-project .icons svg {
+    cursor: pointer;
 }
 
 /* HEADER SYLES */
