@@ -1,4 +1,4 @@
-import { displayProjectDialog, handleProjectCreation } from "./projects.js";
+import { displayProjectDialog, handleProjectCreation, renderProjects, getProjects } from "./projects.js";
 import "./styles.css";
 import "./reset.css";
 
@@ -86,6 +86,12 @@ const todo = new Todo(...testValues);
 displayProjectDialog();
 
 handleProjectCreation(".project-form", ".new-project-dialog");
+
+// Display the projects
+// Get the projects DOM container
+const projectsContainer = document.querySelector(".nav-list");
+
+// console.log(renderProjects(projectsContainer, getProjects()));
 
 // The new todo dialog
 const newTodoButton = document.querySelector(".new-task");

@@ -53,28 +53,12 @@ function saveToStorage(listOfprojects) {
     return localStorage.setItem("projects", JSON.stringify(listOfprojects));
 }
 
-// Iterate over save project and append them to the container
-// export function renderProjects(container, projects) {
-//     for (let i = 0; i < projects.length; i++) {
-//         const project = projects[i];
 
-//         // Create the li
-//         const listItem = document.createElement(li);
-
-//         listItem.classList.add("nav-link");
-//         listItem.classList.add("sub-project");
-//         listItem.innherHtml = `<h4>${project}</h4>`
-
-//         container.appendChild(listItem);
-//     }
-
-//     return container;
-// }
 
 
 // from index.js
 console.log(handleProjectCreation(".project-form", ".new-project-dialog"));
 
 // Get the container of the projects
-// const projectsContainer = document.querySelector(".nav-list");
-// projectsContainer.innerHTML = renderProjects(container, projects);
+const projectsContainer = document.querySelector(".nav-list");
+projectsContainer.innerHTML = renderProjects(container, projects);
