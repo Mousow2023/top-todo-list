@@ -29,5 +29,16 @@ export const projectManager = {
 
     saveProjects(projects) {
         localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(projects))
-    }
+    },
+
+    deleteProject(projectName) {
+        const projects = this.getProjects();
+        const updatedProjects = projects.filter(project => project.name !== projectName);
+
+        if (updatedProjects.length === projects.length) {
+            throw new Error("Project not found");
+        }
+
+        this.saveProjects(updatedProjects);
+    },
 }

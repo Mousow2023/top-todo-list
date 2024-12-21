@@ -9,6 +9,7 @@ projectDOM.handleProjectForm(".project-form", ".new-project-dialog", ".nav-list"
 // Render the projects
 const projectsContainer = document.querySelector(".nav-list");
 projectDOM.renderProjects(projectsContainer);
+;
 
 
 // The new todo dialog
