@@ -35,9 +35,11 @@ export const projectManager = {
         const projects = this.getProjects();
         const updatedProjects = projects.filter(project => project.name !== projectName);
 
-        if (updatedProjects.length === projects.length) {
-            throw new Error("Project not found");
-        }
+        // if (updatedProjects.length === projects.length) {
+        //     // throw new Error("Project not found");
+        //     console.log(updatedProjects)
+        //     console.log(projects)
+        // }
 
         this.saveProjects(updatedProjects);
     },

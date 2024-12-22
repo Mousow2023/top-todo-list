@@ -58,7 +58,17 @@
             <dialog class="dialog new-project-dialog">
                 <form action="" method="dialog" class="project-form">
                     <label for="project-name">Project Name:</label>
-                    <input type="text" name="project-name" class="project-name" placeholder="e.g: Education">
+                    <input autocomplete="off" type="text" name="project-name" class="project-name"
+                        placeholder="e.g: Education">
+                    <button class="submit-project">Submit</button>
+                </form>
+                <button class="cancel-button cancel">Cancel</button>
+            </dialog>
+            <dialog class="dialog update-project-dialog">
+                <form action="" method="dialog" class="project-form">
+                    <label for="project-name">Project Name:</label>
+                    <input autocomplete="off" type="text" name="project-name" class="project-name"
+                        placeholder="e.g: Education">
                     <button class="submit-project">Submit</button>
                 </form>
                 <button class="cancel-button cancel">Cancel</button>

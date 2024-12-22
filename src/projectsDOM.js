@@ -9,7 +9,7 @@ export const projectDOM = {
                 <li class="nav-link sub-project" data-project-name="${project.name}">
                     <h4>${project.name}</h4>
                     <div class="icons">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <svg class="update-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                             <title>edit</title>
                             <path
                                 d="M20.71,7.04C21.1,6.65 21.1,6 20.71,5.63L18.37,3.29C18,2.9 17.35,2.9 16.96,3.29L15.12,5.12L18.87,8.87M3,17.25V21H6.75L17.81,9.93L14.06,6.18L3,17.25Z" />
@@ -25,7 +25,10 @@ export const projectDOM = {
             .join("");
 
         // Attach event tisteners to delete icons
-        this.handleProjectDeletion(projectsContainer)
+        this.handleProjectDeletion(container);
+
+        // Attach event listener for project update
+        this.handleProjectUpdate(container);
     },
 
     setupProjectDialog(dialogSelector, showButtonSelector, cancelButtonSelector) {
@@ -65,16 +68,78 @@ export const projectDOM = {
 
     handleProjectDeletion(container) {
         container.addEventListener("click", (event) => {
-            const projectElement = event.target.closest(".sub-project");
-            const projectName = projectElement.dataset.projectName;
+            if (event.target.closest(".delete-icon")) {
+                const projectElement = event.target.closest(".sub-project");
+                const projectName = projectElement.dataset.projectName;
 
-            try {
-                projectManager.deleteProject(projectName);
-                this.renderProjects(container);
-            } catch (error) {
-                alert(error.message);
+                try {
+                    projectManager.deleteProject(projectName);
+                    this.renderProjects(container);
+                } catch (error) {
+                    alert(error.message);
+                };
+            }
+        });
+    },
+
+    handleProjectUpdate(container) {
+        container.addEventListener("click", (event) => {
+            if (event.target.closest(".update-icon")) {
+                const projectElement = event.target.closest(".sub-project");
+
+                const projects = projectManager.getProjects();
+                const projectName = projectElement.dataset.projectName;
+                const project = projects.find(project => project.name === projectName)
+
+                if (!project) {
+                    alert(`hangleUpdate did not find project`);
+                    return;
+                }
+
+                this.setupUpdateDialog(project, ".update-project-dialog", container)
+            }
+        });
+    },
+
+    setupUpdateDialog(project, dialogSelector, projectsContainer) {
+        const dialog = document.querySelector(dialogSelector);
+        const cancelButton = dialog.querySelector(".cancel-button");
+        const input = dialog.querySelector(".project-name");
+        const form = dialog.querySelector("form");
+        const projectName = project.name;
+
+        dialog.showModal();
+
+        input.value = projectName;
+
+        function onSubmit(event) {
+            event.preventDefault();
+
+            // Get the new inputed name
+            const newName = input.value.trim();
+
+            // If the name hasn't change change close the dialog
+            if (newName === projectName) {
+                dialog.close();
             }
 
-        })
-    },
+            // Check if the new name already exists
+            const projects = projectManager.getProjects();
+            if (projects.some(proj => proj.name === newName && proj.name !== projectName)) {
+                return;
+            }
+
+            // Get the index of the project
+            const index = projects.findIndex(p => p.name === projectName)
+            projects[index].name = newName;
+
+            projectManager.saveProjects(projects);
+            this.renderProjects(projectsContainer);
+            dialog.close();
+        }
+
+        form.addEventListener("submit", onSubmit.bind(this), { once: true })
+
+        cancelButton.addEventListener("click", () => dialog.close())
+    }
 }
