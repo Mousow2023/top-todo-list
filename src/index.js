@@ -23,4 +23,18 @@ newTodoButton.addEventListener("click", () => {
 
 closeTodoDialog.addEventListener("click", () => {
     todoDialog.close();
-})
+});
+
+
+// try to see the date inside the new todo form
+const dialog = document.querySelector(".new-todo-dialog");
+const form = dialog.querySelector("form");
+form.addEventListener("submit", () => {
+    const title = document.getElementById("title").value;
+    const priority = document.getElementById("priority").value;
+    const dueDate = document.getElementById("due-date").value;
+    const description = document.getElementById("description").value;
+
+    const todo = { title, priority, dueDate, description };
+    console.log(todo);
+});
