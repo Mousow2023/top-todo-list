@@ -2,7 +2,7 @@ import { projectManager } from "./projectManager.js";
 import { isValid, isBefore, parse } from "date-fns";
 
 // The Todo object
-class Todo {
+export class Todo {
     static priorities = ["low", "medium", "high"];
 
     constructor(title, description, dueDate, priority, project) {

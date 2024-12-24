@@ -1,4 +1,5 @@
 import { projectDOM } from "./projectsDOM.js";
+import { todoDom } from "./todoDOM.js";
 import "./styles.css";
 import "./reset.css";
 
@@ -6,10 +7,15 @@ import "./reset.css";
 projectDOM.setupProjectDialog(".new-project-dialog", ".new-project", ".cancel-button");
 projectDOM.handleProjectForm(".project-form", ".new-project-dialog", ".nav-list");
 
-// Render the projects
+// Render the projects on load
 const projectsContainer = document.querySelector(".nav-list");
 projectDOM.renderProjects(projectsContainer);
 ;
+
+// Render the priorities on load
+const prioritiesContainer = document.querySelector(".priorities-container");
+console.log(prioritiesContainer);
+todoDom.rederPriorities(prioritiesContainer);
 
 
 // The new todo dialog
