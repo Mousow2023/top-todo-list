@@ -14,8 +14,11 @@ projectDOM.renderProjects(projectsContainer);
 
 // Render the priorities on load
 const prioritiesContainer = document.querySelector(".priorities-container");
-console.log(prioritiesContainer);
 todoDom.rederPriorities(prioritiesContainer);
+
+// Render the projects in the form on load
+const formProjectsContainer = document.querySelector(".projects-container");
+todoDom.renderProjects(formProjectsContainer);
 
 
 // The new todo dialog
@@ -42,5 +45,4 @@ form.addEventListener("submit", () => {
     const description = document.getElementById("description").value;
 
     const todo = { title, priority, dueDate, description };
-    console.log(todo);
 });
