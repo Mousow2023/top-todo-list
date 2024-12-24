@@ -12,14 +12,20 @@ const projectsContainer = document.querySelector(".nav-list");
 projectDOM.renderProjects(projectsContainer);
 ;
 
-// Render the priorities on load
-const prioritiesContainer = document.querySelector(".priorities-container");
-todoDom.rederPriorities(prioritiesContainer);
+// Render the projects and properties in the form
+const newTaskButton = document.querySelector(".new-task");
+newTaskButton.addEventListener("click", () => {
+    // Render the priorities in the form when when it opens
+    const prioritiesContainer = document.querySelector(".priorities-container");
+    todoDom.rederPriorities(prioritiesContainer);
 
-// Render the projects in the form on load
-const formProjectsContainer = document.querySelector(".projects-container");
-todoDom.renderProjects(formProjectsContainer);
+    // Render the projects in the form when it opens
+    const formProjectsContainer = document.querySelector(".projects-container");
+    todoDom.renderProjects(formProjectsContainer);
+});
 
+// Handle the submission of a todo
+todoDom.handleTodoSubmission(document.querySelector(".new-todo-form"));
 
 // The new todo dialog
 const newTodoButton = document.querySelector(".new-task");

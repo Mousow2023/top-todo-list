@@ -36,6 +36,7 @@ export const todoManager = {
 
         const title = todo.title.trim();
         if (!title) {
+            alert("Invalid title");
             return false;
         }
 
@@ -46,24 +47,28 @@ export const todoManager = {
 
         // Check if the todo's due date is valide 
         if (!isValid(dueDate)) {
+            alert("Invalid due date");
             return false;
         }
 
         // Check if the due date is not a past date
         const today = new Date();
-        if (isBefore(dueDate)) {
+        if (isBefore(dueDate, today)) {
+            alert("The due cannot be a past date");
             return false;
         }
 
         // Check if the todo's priority is in the list of piorities
         const priority = todo.priority.toLowerCase();
         if (!Todo.priorities.includes(priority)) {
+            alert("Priority not found");
             return false;
         }
 
         // Check if the todo's priority is in the list of projects
-        const project = todo.project.name;
-        if (!projects.some(proj => proj.name === project)) {
+        const project = todo.project;
+        if (!projects.some(proj => proj.name.toLowerCase() === project.toLowerCase())) {
+            alert("Project not found");
             return false;
         }
 
@@ -79,7 +84,6 @@ export const todoManager = {
 
         todos.push(todo);
         this.saveTodos(todos);
-        console.log(`${todo.title} is successfully saved!`);
     },
 
     getTodos() {
@@ -95,7 +99,7 @@ export const todoManager = {
         const updatedTodos = todos.filter(tod => tod.title !== todo.title);
 
         this.saveTodos(updatedTodos);
-        console.log(`${todo.title} has been updated`);
+        console.log(`${todo.title} has been deleted`);
     },
 
     updateTodo(oldTodo, newTodo) {
@@ -107,7 +111,6 @@ export const todoManager = {
             // TODO
             todos[index] = { ...oldTodo, ...newTodo };
             this.saveTodos(todos);
-            console.log(`${oldTodo.title} has been updated`);
         } else {
             console.log("Todo not found in update todo")
         }

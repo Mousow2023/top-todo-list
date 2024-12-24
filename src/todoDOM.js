@@ -10,7 +10,7 @@ export const todoDom = {
         const priorities = Todo.priorities;
 
         container.innerHTML = `
-        <option disabled selected>Select Priority</option>
+        <option value="" disabled selected>Select Priority</option>
         ${priorities
                 .map(prior => `
                 <option>${capitalizeFirstLetter(prior)}</option>
@@ -23,12 +23,35 @@ export const todoDom = {
         const projects = projectManager.getProjects();
 
         container.innerHTML = `
-        <option disabled selected>Select Project</option>
+        <option value="" disabled selected>Select Project</option>
         ${projects
                 .map(proj => `
                 <option>${capitalizeFirstLetter(proj.name)}</option>
             `)
                 .join("")}
         `;
-    }
+    },
+
+    handleTodoSubmission(form) {
+        form.addEventListener("submit", (event) => {
+            event.preventDefault();
+            const formData = new FormData(form);
+
+            const todo = {
+                title: formData.get("title").trim() || "",
+                project: formData.get("project").trim() || "",
+                priority: formData.get("priority").trim() || "",
+                dueDate: formData.get("due-date").trim() || "",
+                description: formData.get("description").trim() || ""
+            }
+
+            try {
+                todoManager.addTodo(todo);
+                console.log(`${todo.title} has been saved`);
+                form.reset();
+            } catch (error) {
+                alert(error.message);
+            }
+        });
+    },
 }
