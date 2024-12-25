@@ -3,6 +3,8 @@ import { todoDom } from "./todoDOM.js";
 import "./styles.css";
 import "./reset.css";
 
+
+
 // Initialize the projects section
 projectDOM.setupProjectDialog(".new-project-dialog", ".new-project", ".cancel-button");
 projectDOM.handleProjectForm(".project-form", ".new-project-dialog", ".nav-list");
@@ -29,7 +31,8 @@ newTaskButton.addEventListener("click", () => {
 });
 
 // Handle the submission of a todo
-todoDom.handleTodoSubmission(document.querySelector(".new-todo-form"));
+const dialog = document.querySelector(".new-todo-dialog");
+todoDom.handleTodoSubmission(dialog, todosContainer);
 
 // The new todo dialog
 const newTodoButton = document.querySelector(".new-task");
@@ -46,7 +49,7 @@ closeTodoDialog.addEventListener("click", () => {
 
 
 // try to see the date inside the new todo form
-const dialog = document.querySelector(".new-todo-dialog");
+// const dialog = document.querySelector(".new-todo-dialog");
 const form = dialog.querySelector("form");
 form.addEventListener("submit", () => {
     const title = document.getElementById("title").value;

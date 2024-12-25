@@ -11,7 +11,7 @@ export const todoDom = {
 
         container.innerHTML = todos
             .map(todo => `
-                <div class="todo-container">
+                <div class="todo-container" data-todo-title=${todo.title.replace(/\s+/g, "-")}>
                     <div>
                         <h4 class="todo-name">${todo.title}</h4>
                         <p class="project-name">${todo.project}</p>
@@ -26,15 +26,19 @@ export const todoDom = {
                     </div>
                     <div class="priority-container">
                         <h5>${todo.priority}</h5>
-                        <h4>High</h4>
+                        <h4 class="${todo.priority.toLowerCase()}">High</h4>
                     </div>
                     <div class="todo-buttons">
                         <button class="mark-as-complete">Done</button>
                         <button class="edit">Edit</button>
+                        <button class="delete">Delete</button>
                     </div>
                 </div>
             `)
             .join("");
+
+        // Attach event listener to the delete buttons
+        this.deleteTodoDom(container);
     },
 
     rederPriorities(container) {
@@ -63,26 +67,51 @@ export const todoDom = {
         `;
     },
 
-    handleTodoSubmission(form) {
+    handleTodoSubmission(dialog, container) {
+        const form = dialog.querySelector("form");
+
         form.addEventListener("submit", (event) => {
             event.preventDefault();
             const formData = new FormData(form);
 
             const todo = {
-                title: formData.get("title").trim() || "",
-                project: formData.get("project").trim() || "",
-                priority: formData.get("priority").trim() || "",
-                dueDate: formData.get("due-date").trim() || "",
+                title: formData.get("title").trim(),
+                project: formData.get("project").trim(),
+                priority: formData.get("priority").trim(),
+                dueDate: formData.get("due-date").trim(),
                 description: formData.get("description").trim() || ""
             }
 
             try {
                 todoManager.addTodo(todo);
-                console.log(`${todo.title} has been saved`);
+                this.renderTodos(container);
                 form.reset();
+                dialog.close();
             } catch (error) {
                 alert(error.message);
             }
         });
     },
+
+    deleteTodoDom(container) {
+        container.addEventListener("click", (event) => {
+            if (event.target.closest(".delete")) {
+                const todoElement = event.target.closest(".todo-container");
+                const todoTitle = todoElement.dataset.todoTitle;
+
+                // Find the todo
+                const todos = todoManager.getTodos();
+                const todo = todos.find(t => t.title.replace(/\s+/g, "-") === todoTitle);
+
+                if (!todo) {
+                    return;
+                }
+
+                // Delete and re-render
+                todoManager.deleteTodo(todo);
+                this.renderTodos(container);
+            }
+        });
+    },
+
 }

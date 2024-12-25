@@ -94,12 +94,15 @@ export const todoManager = {
         return localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(todos));
     },
 
-    deleteTodo(todo) {
+    deleteTodo(task) {
+        if (!task.title) {
+            return;
+        }
+
         const todos = this.getTodos();
-        const updatedTodos = todos.filter(tod => tod.title !== todo.title);
+        const updatedTodos = todos.filter(t => t.title.toLowerCase() !== task.title.toLowerCase());
 
         this.saveTodos(updatedTodos);
-        console.log(`${todo.title} has been deleted`);
     },
 
     updateTodo(oldTodo, newTodo) {
