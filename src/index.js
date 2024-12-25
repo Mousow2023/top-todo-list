@@ -12,6 +12,10 @@ const projectsContainer = document.querySelector(".nav-list");
 projectDOM.renderProjects(projectsContainer);
 ;
 
+// Render the todos on load
+const todosContainer = document.querySelector(".todos-container");
+todoDom.renderTodos(todosContainer);
+
 // Render the projects and properties in the form
 const newTaskButton = document.querySelector(".new-task");
 newTaskButton.addEventListener("click", () => {

@@ -247,6 +247,10 @@ button.new-task {
     height: 1000px;
 }
 
+.todos-container {
+    width: 70%
+}
+
 /* todo styles */
 .todo-container {
     margin: var(--section-padding) 0;
@@ -254,7 +258,7 @@ button.new-task {
     align-items: center;
     justify-content: space-between;
     background-color: #fff6f6;
-    width: 65%;
+    width: 100%;
     padding: 1rem;
     border-radius: 5px;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
