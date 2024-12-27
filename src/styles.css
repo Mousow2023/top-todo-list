@@ -300,9 +300,11 @@ button.new-task {
 .todo-container .priority-container h4 {
     padding: 3px 8px;
     border-radius: 4px;
-    background-color: green;
     color: white;
+}
 
+.todo-container .priority-container h4.high {
+    background-color: green;
 }
 
 .todo-container .priority-container h4.medium {
@@ -315,6 +317,7 @@ button.new-task {
 
 .todo-container .todo-buttons {
     display: flex;
+    flex-direction: column;
     gap: 1rem;
 }
 

@@ -26,7 +26,7 @@ export const todoDom = {
                     </div>
                     <div class="priority-container">
                         <h5>${todo.priority}</h5>
-                        <h4 class="${todo.priority.toLowerCase()}">High</h4>
+                        <h4 class="${todo.priority.toLowerCase()}">${todo.priority}</h4>
                     </div>
                     <div class="todo-buttons">
                         <button class="mark-as-complete">Done</button>
@@ -42,6 +42,8 @@ export const todoDom = {
 
         // Attach event listener to the done buttons
         this.completedTodoDom(container);
+
+        this.updateTodoDom(document.querySelector(".update-todo-dialog"), container);
     },
 
     rederPriorities(container) {
@@ -125,18 +127,80 @@ export const todoDom = {
 
                 // Find the todo
                 const todos = todoManager.getTodos();
-                
+
                 const todo = todos.find(t => t.title.replace(/\s+/g, "-") === todoTitle);
-                
+
                 if (!todo) {
                     return;
                 }
                 todoManager.completeTodo(todo);
                 this.renderTodos(container);
                 location.reload();
-
             }
         });
+    },
+
+    updateTodoDom(dialog, container) {
+        container.addEventListener("click", (event) => {
+            if (event.target.closest(".edit")) {
+                const todoElement = event.target.closest(".todo-container");
+                const todoTitle = todoElement.dataset.todoTitle;
+
+                // Find the todo
+                const todos = todoManager.getTodos();
+                const todo = todos.find(t => t.title.replace(/\s+/g, "-") === todoTitle);
+
+                // Set the newTodo
+                const form = dialog.querySelector("form");
+                const cancelButton = dialog.querySelector(".close-todo-dialog");
+
+                // Capture the inputs of the form
+                const titleInput = form.querySelector("#title");
+                const descriptionInput = form.querySelector("#description");
+                const priorityInput = form.querySelector("#priority");
+                const projectInput = form.querySelector("#project");
+                const dueDateInput = form.querySelector("#due-date");
+
+                // 
+                titleInput.value = todo.title.trim();
+                descriptionInput.value = todo.description.trim();
+                dueDateInput.value = todo.dueDate.trim();
+
+                // Render projects
+                this.renderProjects(projectInput);
+                projectInput.value = todo.project.trim();
+                // Render priority
+                this.rederPriorities(priorityInput);
+                priorityInput.value = todo.priority.trim();
+
+                dialog.showModal();
+
+                form.addEventListener("submit", (event) => {
+                    event.preventDefault();
+
+                    // set the values of the form
+                    const newTodo = {
+                        title: form.querySelector("#title").value.trim(),
+                        description: form.querySelector("#description").value.trim() || "",
+                        dueDate: form.querySelector("#due-date").value.trim(),
+                        priority: form.querySelector("#priority").value,
+                        project: form.querySelector("#project").value.trim(),
+                    };
+
+                    try {
+                        todoManager.updateTodo(todo, newTodo);
+                        this.renderTodos(container);
+                        form.reset();
+                        dialog.close();
+                    } catch (error) {
+                        alert(error.message);
+                    }
+                });
+
+                cancelButton.addEventListener("click", () => dialog.close())
+            }
+
+        })
     }
 
 }
