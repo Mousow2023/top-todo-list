@@ -21,6 +21,7 @@ export class Todo {
 
     markAsCompleted() {
         this.isCompleted = !this.isCompleted;
+        return this.isCompleted;
     }
 
     markAsMissed() {
@@ -82,16 +83,31 @@ export const todoManager = {
             throw new Error("Invalid");
         }
 
-        todos.push(todo);
+        const { title, description, dueDate, priority, project } = todo;
+
+        const newTodo = new Todo(title, description, dueDate, priority, project);
+
+        todos.push(newTodo);
         this.saveTodos(todos);
     },
 
     getTodos() {
-        return JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY)) || [];
+        // If there's an in-memory cache, use it; otherwise, load from localStorage
+        const storedTodos = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY)) || [];
+        const todos = storedTodos.map(todoData => {
+            const { title, description, dueDate, priority, project, isCompleted, isMissed } = todoData;
+            const todo = new Todo(title, description, dueDate, priority, project);
+            todo.isCompleted = isCompleted;
+            todo.isMissed = isMissed;
+            return todo;
+        });
+
+        return todos;
     },
 
     saveTodos(todos) {
-        return localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(todos));
+        this.todos = todos; // Update in-memory state
+        localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(todos));
     },
 
     deleteTodo(task) {
@@ -115,7 +131,18 @@ export const todoManager = {
             todos[index] = { ...oldTodo, ...newTodo };
             this.saveTodos(todos);
         } else {
-            console.log("Todo not found in update todo")
+            console.log("Todo not found in update todo");
+        }
+    },
+
+    completeTodo(todo) {
+        const todos = this.getTodos();
+
+        const index = todos.findIndex(tod => tod.title === todo.title);
+
+        if (index !== -1) {
+            todos[index].markAsCompleted();
+            this.saveTodos(todos);
         }
     }
 };

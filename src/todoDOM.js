@@ -11,7 +11,7 @@ export const todoDom = {
 
         container.innerHTML = todos
             .map(todo => `
-                <div class="todo-container" data-todo-title=${todo.title.replace(/\s+/g, "-")}>
+                <div class="todo-container ${todo.isCompleted ? 'todo-completed' : ''}"data-todo-title=${todo.title.replace(/\s+/g, "-")}>
                     <div>
                         <h4 class="todo-name">${todo.title}</h4>
                         <p class="project-name">${todo.project}</p>
@@ -39,6 +39,9 @@ export const todoDom = {
 
         // Attach event listener to the delete buttons
         this.deleteTodoDom(container);
+
+        // Attach event listener to the done buttons
+        this.completedTodoDom(container);
     },
 
     rederPriorities(container) {
@@ -50,7 +53,7 @@ export const todoDom = {
                 .map(prior => `
                 <option>${capitalizeFirstLetter(prior)}</option>
             `)
-                .join("")}
+                .join("")};
         `;
     },
 
@@ -76,11 +79,11 @@ export const todoDom = {
 
             const todo = {
                 title: formData.get("title").trim(),
-                project: formData.get("project").trim(),
-                priority: formData.get("priority").trim(),
+                description: formData.get("description").trim() || "",
                 dueDate: formData.get("due-date").trim(),
-                description: formData.get("description").trim() || ""
-            }
+                priority: formData.get("priority").trim(),
+                project: formData.get("project").trim(),
+            };
 
             try {
                 todoManager.addTodo(todo);
@@ -113,5 +116,27 @@ export const todoDom = {
             }
         });
     },
+
+    completedTodoDom(container) {
+        container.addEventListener("click", (event) => {
+            if (event.target.closest(".mark-as-complete")) {
+                const todoElement = event.target.closest(".todo-container");
+                const todoTitle = todoElement.dataset.todoTitle;
+
+                // Find the todo
+                const todos = todoManager.getTodos();
+                
+                const todo = todos.find(t => t.title.replace(/\s+/g, "-") === todoTitle);
+                
+                if (!todo) {
+                    return;
+                }
+                todoManager.completeTodo(todo);
+                this.renderTodos(container);
+                // location.reload();
+
+            }
+        });
+    }
 
 }
