@@ -133,7 +133,7 @@ export const todoDom = {
                 }
                 todoManager.completeTodo(todo);
                 this.renderTodos(container);
-                // location.reload();
+                location.reload();
 
             }
         });
