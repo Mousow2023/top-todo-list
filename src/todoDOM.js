@@ -93,7 +93,7 @@ export const todoDom = {
                 form.reset();
                 dialog.close();
             } catch (error) {
-                alert(error.message);
+                console.log(error.message);
             }
         });
     },
@@ -150,32 +150,36 @@ export const todoDom = {
                 const todos = todoManager.getTodos();
                 const todo = todos.find(t => t.title.replace(/\s+/g, "-") === todoTitle);
 
-                // Set the newTodo
+                if(!todo) {
+                    console.log("Todo not found");
+                    return;
+                };
+
+                // Populate the form with the todo's details
                 const form = dialog.querySelector("form");
                 const cancelButton = dialog.querySelector(".close-todo-dialog");
-
-                // Capture the inputs of the form
                 const titleInput = form.querySelector("#title");
                 const descriptionInput = form.querySelector("#description");
                 const priorityInput = form.querySelector("#priority");
                 const projectInput = form.querySelector("#project");
                 const dueDateInput = form.querySelector("#due-date");
 
-                // 
                 titleInput.value = todo.title.trim();
                 descriptionInput.value = todo.description.trim();
                 dueDateInput.value = todo.dueDate.trim();
 
-                // Render projects
+                // Render projects and set the selected value
                 this.renderProjects(projectInput);
                 projectInput.value = todo.project.trim();
-                // Render priority
+
+                // Render priorities and set the selected value
                 this.rederPriorities(priorityInput);
                 priorityInput.value = todo.priority.trim();
 
+                // Show the dialog
                 dialog.showModal();
 
-                form.addEventListener("submit", (event) => {
+                const submitHandler = (event) => {
                     event.preventDefault();
 
                     // set the values of the form
@@ -187,17 +191,31 @@ export const todoDom = {
                         project: form.querySelector("#project").value.trim(),
                     };
 
+                    console.log(newTodo);
+
+                    if (!todoManager.isValidTodo(newTodo)) {
+                        return;
+                    }
+
                     try {
                         todoManager.updateTodo(todo, newTodo);
                         this.renderTodos(container);
                         form.reset();
                         dialog.close();
                     } catch (error) {
-                        alert(error.message);
+                        console.log(error.message);
                     }
-                });
+                };
 
-                cancelButton.addEventListener("click", () => dialog.close())
+                // Remove any previous submit listeners to avoid duplication
+                form.removeEventListener("submit", submitHandler)
+                form.addEventListener("submit", submitHandler)
+
+                // Ensure cancel button resets the form and closes the dialog
+                cancelButton.addEventListener("click", () => {
+                    form.reset();
+                    dialog.close();
+                })
             }
 
         })

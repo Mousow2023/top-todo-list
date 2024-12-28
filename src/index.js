@@ -4,7 +4,6 @@ import "./styles.css";
 import "./reset.css";
 
 
-
 // Initialize the projects section
 projectDOM.setupProjectDialog(".new-project-dialog", ".new-project", ".cancel-button");
 projectDOM.handleProjectForm(".project-form", ".new-project-dialog", ".nav-list");

@@ -37,7 +37,7 @@ export const todoManager = {
 
         const title = todo.title.trim();
         if (!title) {
-            alert("Invalid title");
+            console.log("Invalid title");
             return false;
         }
 
@@ -48,28 +48,28 @@ export const todoManager = {
 
         // Check if the todo's due date is valide 
         if (!isValid(dueDate)) {
-            alert("Invalid due date");
+            console.log("Invalid due date");
             return false;
         }
 
         // Check if the due date is not a past date
         const today = new Date();
         if (isBefore(dueDate, today)) {
-            alert("The due cannot be a past date");
+            console.log("The due cannot be a past date");
             return false;
         }
 
         // Check if the todo's priority is in the list of piorities
         const priority = todo.priority.toLowerCase();
         if (!Todo.priorities.includes(priority)) {
-            alert("Priority not found");
+            console.log("Priority not found");
             return false;
         }
 
         // Check if the todo's priority is in the list of projects
         const project = todo.project;
         if (!projects.some(proj => proj.name.toLowerCase() === project.toLowerCase())) {
-            alert("Project not found");
+            console.log("Project not found");
             return false;
         }
 
