@@ -223,6 +223,11 @@ button.new-project {
     justify-content: center;
 }
 
+.no-todos {
+    margin-top: 3rem;
+    text-align: center;
+}
+
 .new-task {
     display: flex;
     padding: 5px;

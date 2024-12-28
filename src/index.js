@@ -1,5 +1,6 @@
 import { projectDOM } from "./projectsDOM.js";
 import { todoDom } from "./todoDOM.js";
+import {todoSorter} from "./sorter.js";
 import "./styles.css";
 import "./reset.css";
 
@@ -45,6 +46,31 @@ newTodoButton.addEventListener("click", () => {
 closeTodoDialog.addEventListener("click", () => {
     todoDialog.close();
 });
+
+const todayButton = document.querySelector(".today");
+const allButton = document.querySelector(".all");
+const ongoingButton = document.querySelector(".ongoing");
+const completedButton = document.querySelector(".completed");
+
+// render the todos for today
+todayButton.addEventListener("click", () => {
+    todoDom.renderTodos(todosContainer, todoSorter.today())
+});
+
+// render the yet to be completed todos
+ongoingButton.addEventListener("click", () => {
+    todoDom.renderTodos(todosContainer, todoSorter.ongoing())
+});
+
+// render the completed todos
+completedButton.addEventListener("click", () => {
+    todoDom.renderTodos(todosContainer, todoSorter.completed())
+})
+
+// render all the todos
+allButton.addEventListener("click", () => {
+    todoDom.renderTodos(todosContainer);
+})
 
 
 // try to see the date inside the new todo form

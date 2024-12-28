@@ -6,8 +6,13 @@ function capitalizeFirstLetter(string) {
 }
 
 export const todoDom = {
-    renderTodos(container) {
-        const todos = todoManager.getTodos();
+    renderTodos(container, todos = todoManager.getTodos()) {
+        if (todos.length === 0) {
+            container.innerHTML = `
+                <h2 class="no-todos">No todos to display</h2>
+            `
+            return;
+        }
 
         container.innerHTML = todos
             .map(todo => `
@@ -190,8 +195,6 @@ export const todoDom = {
                         priority: form.querySelector("#priority").value,
                         project: form.querySelector("#project").value.trim(),
                     };
-
-                    console.log(newTodo);
 
                     if (!todoManager.isValidTodo(newTodo)) {
                         return;
