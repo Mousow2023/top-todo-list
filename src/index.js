@@ -1,6 +1,7 @@
 import { projectDOM } from "./projectsDOM.js";
 import { todoDom } from "./todoDOM.js";
 import {todoSorter} from "./sorter.js";
+import { performanceDom } from "./performanceDom.js";
 import "./styles.css";
 import "./reset.css";
 
@@ -72,15 +73,6 @@ allButton.addEventListener("click", () => {
     todoDom.renderTodos(todosContainer);
 })
 
-
-// try to see the date inside the new todo form
-// const dialog = document.querySelector(".new-todo-dialog");
-const form = dialog.querySelector("form");
-form.addEventListener("submit", () => {
-    const title = document.getElementById("title").value;
-    const priority = document.getElementById("priority").value;
-    const dueDate = document.getElementById("due-date").value;
-    const description = document.getElementById("description").value;
-
-    const todo = { title, priority, dueDate, description };
-});
+// render the performace box
+const performaceBoxContainer = document.querySelector(".performance-box");
+performanceDom.renderPerformanceBox(performaceBoxContainer);
