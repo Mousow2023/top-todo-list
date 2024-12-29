@@ -29,9 +29,9 @@ export const todoDom = {
                         <span class="priority priority-${todo.priority.toLowerCase()}">${capitalizeFirstLetter(todo.priority)} Priority</span>
                     </div>
                     <div class="todo-actions">
-                        <button class="btn-complete mark-as-complete">${todo.isCompleted ? 'Unmark' : 'Mark'} as Complete</button>
+                        <button ${todo.isMissed ? "disabled" : ""} class="btn-complete mark-as-complete">${todo.isCompleted ? 'Unmark' : 'Mark'} as Complete</button>
                         <button class="btn-delete delete">Delete</button>
-                        <button class="btn-update edit">Update</button>
+                        <button ${todo.isMissed ? "disabled" : ""} class="btn-update edit">Update</button>
                     </div>
                 </div>
             `)
