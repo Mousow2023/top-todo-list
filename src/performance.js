@@ -40,6 +40,6 @@ export const performance = {
 
     completionRate() {
         const rate = (this.taskCompleted() * 100) / this.allTasks();
-        return Math.round(rate);;
+        return Math.round(rate);
     }
 }
