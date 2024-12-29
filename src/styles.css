@@ -248,7 +248,7 @@ button.new-task {
 .main-content {
     grid-area: main-content;
     padding: calc(var(--section-padding) * 2) var(--section-padding);
-    height: 1000px;
+    
     display: grid;
     grid-template-columns: 3.5fr 2fr;
     gap: 2rem;

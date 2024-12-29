@@ -1,5 +1,5 @@
 import { projectManager } from "./projectManager.js";
-import { isValid, isBefore, parse } from "date-fns";
+import { isValid, isBefore, parse, isYesterday, endOfDay, startOfDay } from "date-fns";
 
 // The Todo object
 export class Todo {
@@ -52,8 +52,8 @@ export const todoManager = {
             return false;
         }
 
-        // Check if the due date is not a past date
-        const today = new Date();
+        // // Check if the due date is not a past date
+        const today = startOfDay(new Date());
         if (isBefore(dueDate, today)) {
             console.log("The due cannot be a past date");
             return false;
@@ -144,5 +144,16 @@ export const todoManager = {
             todos[index].markAsCompleted();
             this.saveTodos(todos);
         }
+    },
+
+    isMissed(todo) {
+        const dueDate = parse(todo.dueDate, "yyyy-MM-dd", new Date())
+        const today = startOfDay(new Date());
+
+        if (isBefore(dueDate, today) && todo.isCompleted === false) {
+            return true;
+        }
+
+        return false;
     }
 };

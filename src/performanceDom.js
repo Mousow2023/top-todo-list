@@ -29,7 +29,6 @@ export const performanceDom = {
 
             <div class="performance-footer">
                 Keep up the <span class="highlight">great work</span>!
-                Focus on reducing missed deadlines.
             </div>
         `
     }

@@ -22,7 +22,7 @@ export const todoDom = {
                             <h3 class="todo-title">${capitalizeFirstLetter(todo.title)}</h3>
                             <p class="project-name">Project: ${capitalizeFirstLetter(todo.project)}</p>
                         </div>
-                        <span class="todo-status status-${todo.isCompleted ? 'completed' : 'pending'}">${todo.isCompleted ? 'Completed' : 'Pending'}</span>
+                        <span class="todo-status status-${todo.isMissed ? "missed" : todo.isCompleted ? 'completed' : 'pending'}">${todo.isMissed ? "Missed" : todo.isCompleted ? 'Completed' : 'Pending' }</span>
                     </div>
                     <div class="todo-details">
                         <span class="due-date">Due Date: ${todo.dueDate}</span>
@@ -217,6 +217,18 @@ export const todoDom = {
             }
 
         })
-    }
+    },
 
+    checkMissedTodos(container) {
+        const todos = todoManager.getTodos();
+
+        todos.forEach(todo => {
+            if (todoManager.isMissed(todo)) {
+                todo.isMissed = true;
+            };
+        });
+
+        todoManager.saveTodos(todos);
+        this.renderTodos(container);
+    }
 }

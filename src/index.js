@@ -17,7 +17,7 @@ projectDOM.renderProjects(projectsContainer);
 
 // Render the todos on load
 const todosContainer = document.querySelector(".todos-container");
-todoDom.renderTodos(todosContainer);
+todoDom.checkMissedTodos(todosContainer);
 
 // Render the projects and properties in the form
 const newTaskButton = document.querySelector(".new-task");
