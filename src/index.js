@@ -51,7 +51,7 @@ closeTodoDialog.addEventListener("click", () => {
 const todayButton = document.querySelector(".today");
 const allButton = document.querySelector(".all");
 const ongoingButton = document.querySelector(".ongoing");
-const completedButton = document.querySelector(".completed");
+const missedButton = document.querySelector(".missed");
 
 // render the todos for today
 todayButton.addEventListener("click", () => {
@@ -64,8 +64,8 @@ ongoingButton.addEventListener("click", () => {
 });
 
 // render the completed todos
-completedButton.addEventListener("click", () => {
-    todoDom.renderTodos(todosContainer, todoSorter.completed())
+missedButton.addEventListener("click", () => {
+    todoDom.renderTodos(todosContainer, todoSorter.missed())
 })
 
 // render all the todos
